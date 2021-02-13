@@ -1,0 +1,15 @@
+version: 2.1
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          command: make
+          name: build
+
+workflows:
+  main:
+    jobs:
+      - build
