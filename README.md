@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/bjoernmichaelsen/gentoo-go.svg?style=svg)](https://app.circleci.com/pipelines/github/bjoernmichaelsen/gentoo-go)
+
+
 # gentoo-go
 little helper to build and add go to a gentoo stage3 tarball
 
