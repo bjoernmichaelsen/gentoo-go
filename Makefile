@@ -11,7 +11,7 @@ smoketest:| gentoo-go
 	docker run $(DOCKERID)/gentoo-go-smoketest | tee $@
 
 environment.bz2:| gentoo-go
-	cat `find /var/db/pkg/dev-lang/ -name environment.bz2 |grep go |grep -v bootstrap` > $@
+	cat `find /var/db/pkg/dev-lang/ -name $@ |grep go` > $@
 
 Manifest:| gentoo-go
 	docker run $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
@@ -26,7 +26,7 @@ gentoo-go-prep:
 	docker build -f Dockerfile.prep -t gentoo-go-prep .
 
 clean:
-	rm -f Manifest gentoo-go.cid environment.bz2
+	rm -f Manifest gentoo-go.cid environment.bz2 smoketest
 
 push-image:
 	echo "$${REGISTRY_PASSWORD}" | docker login --username "$${REGISTRY_USERNAME}" --password-stdin
