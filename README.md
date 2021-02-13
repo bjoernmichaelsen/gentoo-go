@@ -24,8 +24,11 @@ This will not help against maliciuos code in the golang or gentoo source
 itself, but might one day help detect malicious code injected in the toolchain
 in those binaries. This is not to say these images are in any what "better"
 than the official ones. But if you are sufficiently paranoid, you can use these
-images to build and compare with an build from the official image of the same
+images to build and compare with a build from the official image of the same
 version and verify the result is the same.
+
+Note that this build still has to rely on binaries, esp. gentoos stage3 and
+go-bootstrap package.
 
 ## Is there any other benefit to these images?
 
