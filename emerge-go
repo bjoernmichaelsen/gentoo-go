@@ -1,2 +1,4 @@
 #!/bin/sh
 emerge dev-lang/go dev-vcs/git
+rm -rf /var/cache/distfiles/*
+rm $0 # remove script
