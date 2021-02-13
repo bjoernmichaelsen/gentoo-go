@@ -8,8 +8,18 @@ jobs:
       - run:
           command: make
           name: build
+      - run:
+          command: make push-image
+          name: push image
 
 workflows:
-  main:
+  weekly:
+    triggers:
+      - schedule:
+          cron: "20 20 * * 2"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - build
