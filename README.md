@@ -12,6 +12,10 @@ it.
 
 no.
 
+## Where are the images?
+
+The images can be found at https://hub.docker.com/r/bjoernmichaelsen/gentoo-go.
+
 ## how?
 
 If you want to build the image locally, have a recent versions of GNU make,
