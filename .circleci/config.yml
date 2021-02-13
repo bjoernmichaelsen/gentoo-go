@@ -8,6 +8,10 @@ jobs:
       - run:
           command: make
           name: build
+      - store_artifacts:
+          path: Manifest
+      - store_artifacts:
+          path: environment.bz2
       - run:
           command: make push-image
           name: push image
