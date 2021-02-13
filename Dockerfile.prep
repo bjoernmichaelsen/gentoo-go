@@ -1,5 +1,6 @@
 FROM gentoo/stage3:amd64-systemd
 RUN emerge --sync
 RUN echo 'FEATURES="-sandbox -ipc-sandbox -network-sandbox -pid-sandbox"' >> /etc/portage/make.conf
+RUN echo 'MAKEOPTS="-j3"' >> /etc/portage/make.conf
 COPY emerge-go /
 RUN chmod u+x emerge-go
