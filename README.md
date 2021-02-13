@@ -13,7 +13,8 @@ no.
 golang does not seem to like being build docker-in-docker -- it need to build
 in a priviledged run. This mini repo provides the tooling to do that: It takes
 a gentoo stage3 tarball and builds the most recent version of go on top of
-it.
+it. From there it should be possible to complete most use cases without the
+need for priviledged execution.
 
 ## why bother at all as there are official golang docker images?
 
