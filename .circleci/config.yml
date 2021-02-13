@@ -19,6 +19,9 @@ jobs:
           name: push image
 
 workflows:
+  commit:
+    jobs:
+      - build
   weekly:
     triggers:
       - schedule:
