@@ -12,6 +12,8 @@ jobs:
           path: Manifest
       - store_artifacts:
           path: environment.bz2
+      - store_artifacts:
+          path: smoketest
       - run:
           command: make push-image
           name: push image

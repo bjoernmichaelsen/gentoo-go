@@ -1,14 +1,19 @@
-BUILD_DATE=$(shell date -I)
-IMAGE_REPO=bjoernmichaelsen/gentoo-go
-IMAGE_TAG=nightly-$(BUILD_DATE)
+BUILD_DATE:=$(shell date -I)
+DOCKERID:=bjoernmichaelsen
+IMAGE_REPO:=$(DOCKERID)/gentoo-go
+IMAGE_TAG:=nightly-$(BUILD_DATE)
 
-metadata: environment.bz2 Manifest
-	true
+metadata: environment.bz2 Manifest smoketest
+	@true
 
-environment.bz2: gentoo-go
+smoketest:| gentoo-go
+	docker build . -f Dockerfile.smoketest -t $(DOCKERID)/gentoo-go-smoketest
+	docker run $(DOCKERID)/gentoo-go-smoketest | tee $@
+
+environment.bz2:| gentoo-go
 	cat `find /var/db/pkg/dev-lang/ -name environment.bz2 |grep go |grep -v bootstrap` > $@
 
-Manifest: gentoo-go
+Manifest:| gentoo-go
 	docker run $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
 
 gentoo-go: gentoo-go-prep

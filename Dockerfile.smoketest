@@ -1,0 +1,4 @@
+FROM bjoernmichaelsen/gentoo-go
+COPY smoketest.go /
+RUN chmod u+x /smoketest.go
+CMD ["sh", "/smoketest.go"]
