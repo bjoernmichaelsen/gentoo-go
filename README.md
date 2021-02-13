@@ -34,11 +34,12 @@ go-bootstrap package.
 
 You get a gentoo userspace that is ready to go. If you for any reason prefer
 that for your usecase over the Debian base of the "official" golang images, you
-are invited to take advantage of that.
+are invited to take advantage of that. Note the build does not update gentoo
+packages to keep the diff to the stage3 small.
 
 ## Where are the images produced by this?
 
-The images can be found at https://hub.docker.com/r/bjoernmichaelsen/gentoo-go.
+The images can be found at https://hub.docker.com/r/bjoernmichaelsen/gentoo-go/tags.
 
 ## how can I use this locally?
 
