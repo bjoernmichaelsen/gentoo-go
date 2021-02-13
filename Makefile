@@ -1,5 +1,5 @@
 BUILD_DATE=$(shell date -I)
-IMAGE=bjoernmichaelsen/gentoo-go
+IMAGE=docker.io/bjoernmichaelsen/gentoo-go
 IMAGE_TAG=nightly-$(BUILD_DATE)
 
 metadata: environment.bz2 Manifest
