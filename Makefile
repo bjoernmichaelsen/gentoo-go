@@ -11,7 +11,7 @@ smoketest:| gentoo-go
 	docker run $(DOCKERID)/gentoo-go-smoketest | tee $@
 
 environment.bz2:| gentoo-go
-	cat `find /var/db/pkg/dev-lang/ -name $@ |grep go` > $@
+	docker run bjoernmichaelsen/gentoo-go /bin/sh -c 'cat `find /var/db/pkg/dev-lang/ -name $@ |grep go`' > $@
 
 Manifest:| gentoo-go
 	docker run $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
