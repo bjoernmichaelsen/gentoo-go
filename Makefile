@@ -8,18 +8,19 @@ metadata: environment.bz2 Manifest smoketest
 
 smoketest:| gentoo-go
 	docker build . -f Dockerfile.smoketest -t $(DOCKERID)/gentoo-go-smoketest
-	docker run $(DOCKERID)/gentoo-go-smoketest | tee $@
+	docker run --rm $(DOCKERID)/gentoo-go-smoketest | tee $@
 
 environment.bz2:| gentoo-go
-	docker run bjoernmichaelsen/gentoo-go /bin/sh -c 'cat `find /var/db/pkg/dev-lang/ -name $@ |grep go`' > $@
+	docker run --rm bjoernmichaelsen/gentoo-go /bin/sh -c 'cat `find /var/db/pkg/dev-lang/ -name $@ |grep go`' > $@
 
 Manifest:| gentoo-go
-	docker run $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
+	docker run --rm $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
 
 gentoo-go: gentoo-go-prep
 	docker run --privileged --cidfile gentoo-go.cid gentoo-go-prep /emerge-go
 	docker commit `cat gentoo-go.cid` $(IMAGE_REPO):$(IMAGE_TAG)
 	docker tag $(IMAGE_REPO):$(IMAGE_TAG) $(IMAGE_REPO):latest
+	docker container rm `cat gentoo-go.cid`
 	rm gentoo-go.cid
 
 gentoo-go-prep:
