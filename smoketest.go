@@ -6,7 +6,7 @@ import "os/exec"
 import "runtime"
 
 func main() {
-    portage, _ := exec.Command("emerge", "-pv", "sys-apps/portage", "dev-lang/go").Output()
+    portage, _ := exec.Command("emerge", "-pev", "world").Output()
     fmt.Printf("%s\n", runtime.Version())
     fmt.Printf("%s", portage)
 }
