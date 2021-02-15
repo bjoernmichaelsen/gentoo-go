@@ -42,6 +42,12 @@ packages to keep the diff to the stage3 small.
 
 The images can be found at https://hub.docker.com/r/bjoernmichaelsen/gentoo-go/tags.
 
+## What tags exist in the docker hub repo?
+
+* latest: the last build (moving)
+* goX.XX.X: the latest build with that go version (moving)
+* nightly-XXXX-XX-XX: the build on that (stable)
+
 ## how can I use this locally?
 
 If you want to build the image locally, have a recent versions of GNU make,
@@ -57,7 +63,7 @@ pre-installed.
 At the time of writing, the stage3 tarball is 1.2GB. go currently adds some
 400MB to that. Some 300MB are added by updating with (before building):
 
-   emerge --sync
+    emerge --sync
 
 As go builds static binaries, nothing from the build image will be deployed in
 most cases, so the layers have been left intact as keeping the history intact
