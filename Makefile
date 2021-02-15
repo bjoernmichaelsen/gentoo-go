@@ -20,6 +20,7 @@ gentoo-go: gentoo-go-prep
 	docker run --privileged --cidfile gentoo-go.cid gentoo-go-prep /emerge-go
 	docker commit `cat gentoo-go.cid` $(IMAGE_REPO):$(IMAGE_TAG)
 	docker tag $(IMAGE_REPO):$(IMAGE_TAG) $(IMAGE_REPO):latest
+	docker tag $(IMAGE_REPO):$(IMAGE_TAG) $(IMAGE_REPO):`docker run $(IMAGE_REPO):$(IMAGE_TAG) sh -c "go version|cut -f3 -d\ "`
 	docker container rm `cat gentoo-go.cid`
 	rm gentoo-go.cid
 
