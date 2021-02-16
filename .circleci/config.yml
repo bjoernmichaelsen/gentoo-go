@@ -9,11 +9,11 @@ jobs:
           command: make
           name: build
       - store_artifacts:
-          path: Manifest
+          path: build/Manifest
       - store_artifacts:
-          path: environment.bz2
+          path: build/environment.bz2
       - store_artifacts:
-          path: smoketest
+          path: build/smoketest
       - run:
           command: make push-image
           name: push image
