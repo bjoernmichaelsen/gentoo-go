@@ -3,7 +3,7 @@ DOCKERID:=bjoernmichaelsen
 IMAGE_REPO:=$(DOCKERID)/gentoo-go
 IMAGE_TAG:=nightly-$(BUILD_DATE)
 
-metadata: environment.bz2 Manifest smoketest
+all: environment.bz2 Manifest smoketest
 	@true
 
 smoketest:| gentoo-go
@@ -34,4 +34,4 @@ push-image:
 	echo "$${REGISTRY_PASSWORD}" | docker login --username "$${REGISTRY_USERNAME}" --password-stdin
 	docker push $(IMAGE_REPO)
 
-.PHONY: metadata gentoo-go gentoo-go-prep clean push-image
+.PHONY: all gentoo-go gentoo-go-prep clean push-image
