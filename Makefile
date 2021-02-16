@@ -2,6 +2,8 @@ BUILD_DATE:=$(shell date -I)
 DOCKERID:=bjoernmichaelsen
 IMAGE_REPO:=$(DOCKERID)/gentoo-go
 IMAGE_TAG:=nightly-$(BUILD_DATE)
+FEATURES:="-sandbox -ipc-sandbox -network-sandbox -pid-sandbox"
+MAKEOPTS:="-j3"
 
 all: environment.bz2 Manifest smoketest
 	@true
@@ -17,7 +19,7 @@ Manifest:| gentoo-go
 	docker run --rm $(IMAGE_REPO):$(IMAGE_TAG) cat /var/db/repos/gentoo/Manifest > Manifest
 
 gentoo-go: gentoo-go-prep
-	docker run --privileged --cidfile gentoo-go.cid --env FEATURES="-sandbox -ipc-sandbox -network-sandbox -pid-sandbox" --env MAKEOPTS="-j3" gentoo-go-prep sh -c 'emerge dev-lang/go dev-vcs/git && emerge --unmerge go-bootstrap && rm -rf /var/cache/distfiles/*'
+	docker run --privileged --cidfile gentoo-go.cid --env FEATURES=$(FEATURES) --env MAKEOPTS=$(MAKEOPTS) gentoo-go-prep sh -c 'emerge dev-lang/go dev-vcs/git && emerge --unmerge go-bootstrap && rm -rf /var/cache/distfiles/*'
 	docker commit `cat gentoo-go.cid` $(IMAGE_REPO):$(IMAGE_TAG)
 	docker tag $(IMAGE_REPO):$(IMAGE_TAG) $(IMAGE_REPO):latest
 	docker tag $(IMAGE_REPO):$(IMAGE_TAG) $(IMAGE_REPO):`docker run $(IMAGE_REPO):$(IMAGE_TAG) sh -c "go version|cut -f3 -d\ "`
