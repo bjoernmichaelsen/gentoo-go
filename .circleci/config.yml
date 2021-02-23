@@ -19,6 +19,7 @@ jobs:
           name: push image
 
 workflows:
+  version: 2
   commit:
     jobs:
       - build
